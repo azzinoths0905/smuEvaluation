@@ -1,3 +1,5 @@
+// import { stringify } from "querystring";
+
 Page({
   data: {
     cellClass: "weui-cell",
@@ -26,15 +28,19 @@ Page({
   },
 
   getCaptcha: function () {
-    wx.downloadFile({
+    const task = wx.downloadFile({
       url: "https://cas.shmtu.edu.cn/cas/captcha",
-      success: (res) => {
-        const i = res.cookies[0].indexOf(";")
+      success: res => {
         this.setData({
           captchaPath: res.tempFilePath,
-          cookie: res.cookies[0].slice(0, i + 1)
         })
       }
+    })
+    task.onHeadersReceived(res => {
+      const rawCookie = res.header["Set-Cookie"]
+      this.setData({
+        cookie: rawCookie.split(";")[0]
+      })
     })
   },
 
