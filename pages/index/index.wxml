@@ -1,0 +1,101 @@
+<view class="page">
+  <form bindsubmit="goLogin">
+    <view class="weui-form">
+      <view class="weui-form__text-area">
+        <view class="weui-form__title">欢迎使用海事评教王</view>
+        <view class="weui-form__desc">请输入你登录教务系统的学号和密码</view>
+      </view>
+      <view class="weui-form__control-area">
+        <view class="weui-cells__group weui-cells__group_form">
+          <view class="weui-cells weui-cells_form">
+            <view class="{{cellClass}}">
+              <view class="weui-cell__hd">
+                <label class="{{inputClass}}">学号</label>
+              </view>
+              <view class="weui-cell__bd">
+                <input class="weui-input" bindinput="inputChange" name="username" type="number" pattern="[0-9]*" placeholder="请输入学号" />
+              </view>
+              <view class="weui-cell__ft" wx:if="{{wrongInfo}}">
+                <icon type="warn" size="23" color="#E64340"></icon>
+              </view>
+            </view>
+            <view class="{{cellClass}}">
+              <view class="weui-cell__hd">
+                <label class="{{inputClass}}">密码</label>
+              </view>
+              <view class="weui-cell__bd">
+                <input class="weui-input" name="password" type="password" placeholder="请输入密码" />
+              </view>
+              <view class="weui-cell__ft" wx:if="{{wrongInfo}}">
+                <icon type="warn" size="23" color="#E64340"></icon>
+              </view>
+            </view>
+            <view class="{{cellClass}}" style="padding: 0 32px">
+              <view class="weui-cell__hd">
+                <label class="{{inputClass}}">验证码</label>
+              </view>
+              <view class="weui-cell__bd">
+                <input class="weui-input" name="captcha" placeholder="请输入验证码" />
+              </view>
+              <view class="weui-cell__ft">
+                <image class="weui-vcode-img" src="{{captchaPath}}" bind:tap="getCaptcha" style="width: 108px"></image>
+              </view>
+              <view class="weui-cell__ft" wx:if="{{wrongInfo}}">
+                <icon type="warn" size="23" color="#E64340"></icon>
+              </view>
+            </view>
+          </view>
+          <view class="weui-cells__tips">点击验证码即可刷新</view>
+        </view>
+      </view>
+      <view class="weui-form__tips-area">
+        <label for="weuiAgree" class="weui-agree">
+          <input id="weuiAgree" type="checkbox" class="weui-agree__checkbox" />
+          <span class="weui-agree__text">
+            点击这里
+            <a bind:tap="showTipDialog">支持一下YYH</a>
+          </span>
+        </label>
+      </view>
+      <view class="weui-form__opr-area">
+        <button type="primary" form-type="submit">确定</button>
+      </view>
+      <view class="weui-form__extra-area">
+        <view class="weui-footer">
+          <view class="weui-footer__text">Copyright © 2019 Ron You</view>
+        </view>
+      </view>
+    </view>
+  </form>
+  <view class="weui-demo-dialog {{showDialog ? 'weui-demo-dialog_show' : ''}}" wx:if="{{showDialog}}">
+    <view class="weui-mask"></view>
+    <view class="weui-dialog__wrp">
+      <view class="weui-dialog">
+        <view class="weui-dialog__hd">
+          <view class="weui-dialog__title" wx:if="{{hasResponsed && wrongInfo}}">验证失败</view>
+        </view>
+        <view class="weui-dialog__bd" wx:if="{{!hasResponsed}}">
+          <view class="weui-loading__wrp">
+            <view class="weui-loading loading"></view>
+          </view>
+        </view>
+        <view class="weui-dialog__ft" wx:if="{{hasResponsed && wrongInfo}}">
+          <view class="weui-dialog__btn" bindtap="closeDialog">确定</view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="weui-demo-dialog {{showTip ? 'weui-demo-dialog_show' : ''}}" wx:if="{{showTip}}">
+    <view class="weui-mask"></view>
+    <view class="weui-dialog__wrp">
+      <view class="weui-dialog">
+        <view class="weui-dialog__bd">
+          <image class="weui-article__img" src="{{tipPath}}" mode="aspectFill" style="max-width:100%; height: 320px;" />
+        </view>
+        <view class="weui-dialog__ft">
+          <view class="weui-dialog__btn" bindtap="closeTipDialog">确定</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

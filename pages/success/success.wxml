@@ -1,0 +1,41 @@
+<view class="page">
+    <view class="weui-msg">
+        <view class="weui-msg__icon-area">
+            <icon type="success" size="64"></icon>
+        </view>
+        <view class="weui-msg__text-area">
+            <view class="weui-msg__title">评教成功</view>
+            <view class="weui-msg__desc">所有课程均已完成评教，感谢你的使用～</view>
+        </view>
+        <view class="weui-msg__opr-area">
+            <view class="weui-btn-area">
+                <button class="weui-btn" style="background-color: orange; color: white" bindtap="showTipDialog">
+                    支持一下YYH
+                </button>
+            </view>
+        </view>
+        <view class="weui-msg__opr-area">
+            <view class="weui-btn-area">
+                <button class="weui-btn" type="primary" bindtap="complete">完成</button>
+            </view>
+        </view>
+        <view class="weui-msg__extra-area">
+            <view class="weui-footer">
+                <view class="weui-footer__text">Copyright © 2019 Ron You</view>
+            </view>
+        </view>
+        <view class="weui-demo-dialog {{showTip ? 'weui-demo-dialog_show' : ''}}" wx:if="{{showTip}}">
+            <view class="weui-mask"></view>
+            <view class="weui-dialog__wrp">
+                <view class="weui-dialog">
+                    <view class="weui-dialog__bd">
+                        <image class="weui-article__img" src="{{tipPath}}" mode="aspectFill" style="max-width:100%; height: 320px;" />
+                    </view>
+                    <view class="weui-dialog__ft">
+                        <view class="weui-dialog__btn" bindtap="closeTipDialog">确定</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>

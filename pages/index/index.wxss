@@ -1,0 +1,13 @@
+page,
+.page {
+  height: 100%;
+}
+
+.label_warn {
+  color: #fa5151 !important;
+}
+
+.loading {
+  width: 100rpx;
+  height: 100rpx;
+}
